@@ -9,15 +9,15 @@ require("@rails/activestorage").start()
 require("channels")
 
 import '@fortawesome/fontawesome-free/css/all.css'
-import '../stylesheets'
-import '../scripts'
+// import '../stylesheets'
+// import '../scripts'
 import $ from 'jquery'
 import axios from 'axios'
 // import "bootstrap-sprockets"
 import 'bootstrap';
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'popper.js';
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
 import moment from "moment";
+import './active.js'
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
