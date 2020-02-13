@@ -1,24 +1,105 @@
-<h1>HIIIIIII</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+     <style>
 
+         #active{
+             width: 1200px;
+             padding: 20px;
+         }
+         .datainput{
+            width: 200px;
+         }
+         .row{
+           padding: 10px 0;
+         }
+     </style>
+</head>
+<body>
 
-
-<!-- <HTML>
-    <HEAD>
-    <TITLE>RADIO 單選圓鈕</TITLE>
-    </HEAD>
-    <body bgcolor="#FCFAE4">
-    <form>
-    性別：<br>
-    <input  type="radio" name="sex" value="male">男
-    <input  type="radio" name="sex" value="female">女<p>
-    您所要訂購的比薩大小：<br>
-        <input  type="radio" name="size" value="10">10吋
-        <input  type="radio" name="size" value="12">12吋
-        <input  type="radio" name="size" value="14" checked>14吋
-        <input  type="radio" name="size" value="18">18吋<p>
-    </FORM>
-    </BODY> -->
-<section id="active">
-       <p>{{data}}</p>
-
-</section>
+   <div id="active">
+    <h1>優惠活動建立</h1>
+    <h2>篩選活動條件</h2>
+    <br>
+    <div class="columns">
+        <div class="column">
+            <div class="row">
+              <label for="">優惠活動名稱</label>
+              <input class="input" type="text" placeholder="輸入優惠活動名稱">                
+            </div>
+            <div class="row">
+              <label  for="">根據單一活動當作總數管理</label>
+              <br>
+              <input type="radio" id="s-y" value="Yes" v-model="singleactive">
+              <label for="s-y">Yes</label>
+              <br>
+              <input type="radio" id="s-n" value="No" v-model="singleactive">
+              <label for="s-n">No</label>
+              <br>
+              <div v-show="singleactivestatus === true">
+                <label for="">請輸入活動次數總數{{single_choice}}</label>
+                <input class="input" type="number" placeholder="請輸入活動次數總數">  
+              </div>
+            </div>
+            <div class="row">
+              <label  for="">根據User當作總數管理</label>
+              <br>
+              <input type="radio" id="u-y" value="Yes" v-model="useractive">
+              <label for="u-y">Yes</label>
+              <br>
+              <input type="radio" id="u-n" value="No" v-model="useractive">
+              <label for="u-n">No</label>
+              <br>
+              <div v-show="useractivestatus === true">
+                <label for="">請輸入每人限定次數{{user_choice}}</label>
+                <input class="input" type="number" placeholder="請輸入每人限定次數">  
+              </div>
+            </div>
+            <div class="row">
+              <label  for="">根據時間當作活動限制</label>
+              <br>
+              <input type="radio" id="t-y" value="Yes" v-model="timeactive">
+              <label for="t-y">Yes</label>
+              <br>
+              <input type="radio" id="t-n" value="No" v-model="timeactive">
+              <label for="t-n">No</label>
+              <br>
+              <p v-show="timeactivestatus === true">{{time_choice}}
+              <vue-datepicker-local v-model="time"></vue-datepicker-local>
+              </p>
+            </div>
+            <div class="row">
+              <label  for="">根據特定店家進行活動</label>
+              <br>
+              <input type="radio" id="ps-y" value="Yes" v-model="particularstore">
+              <label for="ps-y">Yes</label>
+              <br>
+              <input type="radio" id="ps-n" value="No" v-model="particularstore">
+              <label for="ps-n">No</label>
+              <br>
+              <p v-show="particularstorestatus === true">{{store_choice}}</p>
+            </div>
+            <div class="row">
+              <label  for="">根據特定商品進行活動</label>
+              <br>
+              <input type="radio" id="pi-y" value="Yes" v-model="particularitem">
+              <label for="pi-y">Yes</label>
+              <br>
+              <input type="radio" id="pi-n" value="No" v-model="particularitem">
+              <label for="pi-n">No</label>
+              <br>
+              <p v-show="particularitemstatus === true">{{item_choice}}</p>
+            </div>
+        </div>
+        <div class="column"> 
+        </div>
+        <div class="column">
+        </div>
+    </div>
+   </div>
+</body>
+</html>
