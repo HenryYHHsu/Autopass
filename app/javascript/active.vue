@@ -11,7 +11,8 @@ export default {
   },
   data () {
     return {
-      time: new Date()
+      time: new Date(),
+      range: [new Date(),new Date()],
     }
   }
 }

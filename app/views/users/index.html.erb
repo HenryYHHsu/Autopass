@@ -68,9 +68,10 @@
               <input type="radio" id="t-n" value="No" v-model="timeactive">
               <label for="t-n">No</label>
               <br>
-              <p v-show="timeactivestatus === true">{{time_choice}}
-              <vue-datepicker-local v-model="time"></vue-datepicker-local>
-              </p>
+              <div v-show="timeactivestatus === true">{{time_choice}}
+              <label for="">請選擇活動時間</label>
+              <vue-datepicker-local v-model="range"></vue-datepicker-local>
+              </div>
             </div>
             <div class="row">
               <label  for="">根據特定店家進行活動</label>
@@ -81,7 +82,15 @@
               <input type="radio" id="ps-n" value="No" v-model="particularstore">
               <label for="ps-n">No</label>
               <br>
-              <p v-show="particularstorestatus === true">{{store_choice}}</p>
+              <div v-show="particularstorestatus === true">{{store_choice}}
+              <label for="">指定店家名稱</label>
+              <br>
+              <select v-model="store_name">
+                <option>Nike</option>
+                <option>Addidas</option>
+                <option>Puma</option>
+              </select>
+              </div>
             </div>
             <div class="row">
               <label  for="">根據特定商品進行活動</label>
@@ -92,7 +101,15 @@
               <input type="radio" id="pi-n" value="No" v-model="particularitem">
               <label for="pi-n">No</label>
               <br>
-              <p v-show="particularitemstatus === true">{{item_choice}}</p>
+              <div v-show="particularitemstatus === true">{{item_choice}}
+              <label for="">指定商品名稱</label>
+              <br>
+              <select v-model="item_name">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+              </div>
             </div>
         </div>
         <div class="column"> 

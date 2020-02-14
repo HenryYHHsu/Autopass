@@ -29,7 +29,9 @@ document.addEventListener('turbolinks:load', () => {
           timeactivestatus:false,
           particularstorestatus:false,
           particularitemstatus:false,
-          time: new Date()
+          time: new Date(),
+          range: [new Date(),new Date()],
+          store_name:"",
       },
       methods:{},
       computed:{
@@ -43,37 +45,34 @@ document.addEventListener('turbolinks:load', () => {
           user_choice(){
             if (this.useractive === 'Yes'){
                 this.useractivestatus = true;
-                return this.useractive
             } else{
                 this.useractivestatus = false;
-                return this.useractive
             }
           },
           time_choice(){
             if (this.timeactive === 'Yes'){
                 this.timeactivestatus = true;
-                return this.timeactive
+                console.log(this.range)
             } else{
                 this.timeactivestatus = false;
-                return this.timeactive
             }
           },
           store_choice(){
             if (this.particularstore === 'Yes'){
                 this.particularstorestatus = true;
-                return this.particularstore
+                // return this.particularstore
             } else{
                 this.particularstorestatus = false;
-                return this.particularstore
+                // return this.particularstore
             } 
           },
           item_choice(){
             if (this.particularitem === 'Yes'){
                 this.particularitemstatus = true;
-                return this.particularitem
+                // return this.particularitem
             } else{
                 this.particularitemstatus = false;
-                return this.particularitem
+                // return this.particularitem
             } 
           }
       }
