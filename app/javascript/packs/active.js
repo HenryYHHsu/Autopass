@@ -59,18 +59,27 @@ document.addEventListener('turbolinks:load', () => {
           checked_e:false,
           activestatus:false,
           extra_bonus_target:0,
-
+          ps:"",
+          ps_target:0,
+          ps_cash:0,
+          ps_percent:0,
+          pi:"",
+          pi_target:0,
+          pi_cash:0,
+          pi_percent:0,
       },
       methods:{
         create_active: function(){
           this.activestatus =true;
           let active_condition = [{ name: '活動名稱',
                                     status:true,
-                                    values:this.activename
+                                    values:this.activename,
+                                    condtion:true,
                                   },
                                   { name: '活動總數量',
                                     status: this.checked_single,
                                     condtion:this.singleactivestatus,
+                                    description:'優惠上限金額',
                                     values: this.single_number,
                                     limit: this.single_limit_number
                                   },
@@ -78,27 +87,32 @@ document.addEventListener('turbolinks:load', () => {
                                     name: '每人限定次數',
                                     status: this.checked_user,
                                     condtion: this.useractivestatus,
+                                    description: '優惠上限金額',
                                     values: this.user_number,
                                     limit: this.user_limit_number
                                   },
                                   { name: '期限限定期間',
                                     status:this.checked_time,
-                                    values:this.range
+                                    values:this.range,
+                                    condtion:true,
                                   },
-                                  { name: '特定店活動',
+                                  { name: '特定店活動(店名)',
                                     status:this.checked_ps,
-                                    values: this.store_name
+                                    values: this.store_name,
+                                    condtion:true,
                                   },
                                   { name: '特定產品活動(產品編號)',
                                     status: this.checked_pi,
-                                    values: this.item_name
+                                    values: this.item_name,
+                                    condtion:true,
                                   }]
+          this.active_content =[];
           let active_condition_sort = active_condition.filter( function(item, index, array){
               return item.status === true
           })
-          console.log(active_condition_sort)
           if (this.activename !=="" && active_condition_sort.length > 1){
               this.active_content = active_condition_sort
+              console.log(this.active_content)
           }else{
             alert('至少填個名稱 或是 少填了條件喔')
           }
