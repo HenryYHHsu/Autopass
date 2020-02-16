@@ -1,5 +1,5 @@
 <template>
-  <vue-datepicker-local v-model="time" />
+  <vue-datepicker-local v-model="range" />
 </template>
 
 <script>
@@ -11,8 +11,8 @@ export default {
   },
   data () {
     return {
-      time: new Date(),
-      range: [new Date(),new Date()],
+      time: new moment().format('l'),
+      range: [new moment().format('l'),newmoment().format('l')],
     }
   }
 }
