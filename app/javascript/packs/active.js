@@ -38,51 +38,65 @@ document.addEventListener('turbolinks:load', () => {
           store_name:"",
           item_name:"",
           single_number:0,
+          single_limit_number:0,
           user_number:0,
+          user_limit_number:0,
           singleactivestatus:false,
           useractivestatus:false,
           timeactivestatus:false,
           particularstorestatus:false,
           particularitemstatus:false,
           active_content:[],
+          checked_single:false,
+          checked_user:false,
+          checked_time:false,
+          checked_ps:false,
+          checked_pi:false,
           checked_a:false,
           checked_b:false,
           checked_c:false,
           checked_d:false,
           checked_e:false,
-
+          activestatus:false,
+          extra_bonus_target:0,
 
       },
       methods:{
         create_active: function(){
+          this.activestatus =true;
           let active_condition = [{ name: '活動名稱',
                                     status:true,
                                     values:this.activename
                                   },
                                   { name: '活動總數量',
-                                    status: this.singleactivestatus,
-                                    values: this.single_number
+                                    status: this.checked_single,
+                                    condtion:this.singleactivestatus,
+                                    values: this.single_number,
+                                    limit: this.single_limit_number
                                   },
                                   {
                                     name: '每人限定次數',
-                                    status: this.useractivestatus,
-                                    values: this.user_number
+                                    status: this.checked_user,
+                                    condtion: this.useractivestatus,
+                                    values: this.user_number,
+                                    limit: this.user_limit_number
                                   },
                                   { name: '期限限定期間',
-                                    status:this.timeactivestatus,
+                                    status:this.checked_time,
                                     values:this.range
                                   },
                                   { name: '特定店活動',
-                                    status:this.particularstorestatus,
+                                    status:this.checked_ps,
                                     values: this.store_name
                                   },
                                   { name: '特定產品活動(產品編號)',
-                                    status: this.particularitemstatus,
+                                    status: this.checked_pi,
                                     values: this.item_name
                                   }]
           let active_condition_sort = active_condition.filter( function(item, index, array){
               return item.status === true
           })
+          console.log(active_condition_sort)
           if (this.activename !=="" && active_condition_sort.length > 1){
               this.active_content = active_condition_sort
           }else{
@@ -106,30 +120,18 @@ document.addEventListener('turbolinks:load', () => {
             }
           },
           time_choice(){
-            if (this.timeactive === 'Yes'){
-                this.timeactivestatus = true;
                 let oneDay = 24 * 60 * 60 * 1000 
                 this.time_delta =Math.round(Math.abs(this.range[1] - this.range[0])/oneDay)
                 console.log(this.time_delta)
                 console.log(this.range)
-            } else{
-                this.timeactivestatus = false;
-            }
           },
           store_choice(){
-            if (this.particularstore === 'Yes'){
-                this.particularstorestatus = true;
-            } else{
-                this.particularstorestatus = false;
-            } 
           },
           item_choice(){
             if (this.particularitem === 'Yes'){
                 this.particularitemstatus = true;
-                // return this.particularitem
             } else{
                 this.particularitemstatus = false;
-                // return this.particularitem
             } 
           }
       }

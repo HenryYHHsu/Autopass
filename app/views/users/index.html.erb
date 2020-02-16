@@ -42,61 +42,62 @@
               <input class="datainput" type="text" placeholder="輸入優惠活動名稱" v-model="activename">                
             </div>
             <div class="row">
-              <label  for="">根據單一活動當作總數管理</label>
+              <input type="checkbox" id="checkbox_s" v-model="checked_single">
+              <label for="checkbox_s"> 根據單一活動當作總數管理</label>
+              <div v-show="checked_single ===true">
+                <input type="radio" id="s-y" value="Yes" v-model="singleactive">
+                <label for="s-y">活動次數總數</label>
+                <br>
+                <input type="radio" id="s-n" value="No" v-model="singleactive">
+                <label for="s-n">活動次數總數及優惠上限金額限制 </label>
+                <br>
+              </div>
               <br>
-              <input type="radio" id="s-y" value="Yes" v-model="singleactive">
-              <label for="s-y">Yes</label>
-              <br>
-              <input type="radio" id="s-n" value="No" v-model="singleactive">
-              <label for="s-n">No</label>
-              <br>
-              <div v-show="singleactivestatus === true">
+              <div v-show="checked_single === true && singleactive === 'Yes' ">
+                <label for="">請輸入活動次數總數{{single_choice}}</label><br>
+                <input class="datainput" type="number" placeholder="請輸入活動次數總數" v-model="single_number"><br>
+              </div>
+              <div v-show="checked_single === true && singleactive === 'No'">
                 <label for="">請輸入活動次數總數{{single_choice}}</label><br>
                 <input class="datainput" type="number" placeholder="請輸入活動次數總數" v-model="single_number"><br>
                 <label for="">優惠上限金額</label>
-                <input type="number">
+                <input type="number" v-model="single_limit_number">
               </div>
             </div>
             <div class="row">
-              <label  for="">根據User當作總數管理</label>
-              <br>
-              <input type="radio" id="u-y" value="Yes" v-model="useractive">
-              <label for="u-y">Yes</label>
-              <br>
-              <input type="radio" id="u-n" value="No" v-model="useractive">
-              <label for="u-n">No</label>
-              <br>
-              <div v-show="useractivestatus === true">
+              <input type="checkbox" id="checkbox_u" v-model="checked_user">
+              <label for="checkbox_u"> 根據User當作優惠管理</label>
+              <div v-show="checked_user ===true">
+                <input type="radio" id="u-y" value="Yes" v-model="useractive">
+                <label for="u-y">每人限制次數</label>
+                <br>
+                <input type="radio" id="u-n" value="No" v-model="useractive">
+                <label for="u-n">每人限制次數及上限金額</label>
+                <br>
+              </div>
+              <div v-show="checked_user === true && useractive === 'Yes' ">
+                <label for="">請輸入每人限定次數{{user_choice}}</label><br>
+                <input class="datainput" type="number" placeholder="請輸入每人限定次數" v-model="user_number"><br>
+              </div>
+              <div v-show="checked_user === true && useractive === 'No' ">
                 <label for="">請輸入每人限定次數{{user_choice}}</label><br>
                 <input class="datainput" type="number" placeholder="請輸入每人限定次數" v-model="user_number"><br>
                 <label for="">優惠上限金額</label> 
-                <input type="number">
+                <input type="number" v-model="user_limit_number">
               </div>
             </div>
             <div class="row">
-              <label  for="">根據時間當作活動限制</label>
-              <br>
-              <input type="radio" id="t-y" value="Yes" v-model="timeactive">
-              <label for="t-y">Yes</label>
-              <br>
-              <input type="radio" id="t-n" value="No" v-model="timeactive">
-              <label for="t-n">No</label>
-              <br>
-              <div v-show="timeactivestatus === true">{{time_choice}}
+              <input type="checkbox" id="checkbox_t" v-model="checked_time">
+              <label for="checkbox_t"> 根據時間當作活動限制</label>
+              <div v-show="checked_time === true">{{time_choice}}
               <label for="">請選擇活動時間</label>
               <vue-datepicker-local v-model="range"></vue-datepicker-local>
               </div>
             </div>
             <div class="row">
-              <label  for="">根據特定店家進行活動</label>
-              <br>
-              <input type="radio" id="ps-y" value="Yes" v-model="particularstore">
-              <label for="ps-y">Yes</label>
-              <br>
-              <input type="radio" id="ps-n" value="No" v-model="particularstore">
-              <label for="ps-n">No</label>
-              <br>
-              <div v-show="particularstorestatus === true">{{store_choice}}
+              <input type="checkbox" id="checkbox_ps" v-model="checked_ps">
+              <label for="checkbox_ps"> 根據特定店家進行活動</label>
+              <div v-show="checked_ps === true">{{store_choice}}
               <label for="">指定店家名稱</label>
               <br>
               <select v-model="store_name">
@@ -107,15 +108,9 @@
               </div>
             </div>
             <div class="row">
-              <label  for="">根據特定商品進行活動</label>
-              <br>
-              <input type="radio" id="pi-y" value="Yes" v-model="particularitem">
-              <label for="pi-y">Yes</label>
-              <br>
-              <input type="radio" id="pi-n" value="No" v-model="particularitem">
-              <label for="pi-n">No</label>
-              <br>
-              <div v-show="particularitemstatus === true">{{item_choice}}
+              <input type="checkbox" id="checkbox_pi" v-model="checked_pi">
+              <label for="checkbox_pi"> 根據特定商品進行活動</label>
+              <div v-show="checked_pi === true">{{item_choice}}
               <label for="">指定商品編號</label>
               <br>
                 <select v-model="item_name">
@@ -172,9 +167,9 @@
                 <input class="input" type="number" placeholder="請輸入滿額條件免運條件金額" v-model="extra_bonus_target">
               </div>
             </div>
-            <div class="row">
+            <div class="row" v-if="activestatus=== true && checked_ps === true ">
               <input type="checkbox" id="checkbox" v-model="checked_d">
-              <label for="checkbox"> 活動 D : 特定店優惠 (同商品優惠) </label>
+              <label for="checkbox"> 活動 D : {{store_name}}店優惠 (同商品優惠) </label>
               <div v-show="checked_d ===true">
                 <label>請輸入同商品折扣件數: X </label>
                 <input class="input" type="number" placeholder="請輸入滿額條件金額" v-model="money_discount_target">
@@ -188,7 +183,7 @@
                 <br>
               </div>
             </div>
-            <div class="row">
+            <div class="row" v-if="activestatus=== true && checked_pi === true ">
               <input type="checkbox" id="checkbox" v-model="checked_e">
               <label for="checkbox"> 活動 E : 特定商品優惠 </label>
               <div v-show="checked_e ===true">
@@ -204,6 +199,7 @@
                 <br>
               </div>
             </div>
+            <div class="row" v-else></div>
         </div>
         <div class="column">
           <div class="row">
