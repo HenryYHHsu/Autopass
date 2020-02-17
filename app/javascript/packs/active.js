@@ -47,6 +47,7 @@ document.addEventListener('turbolinks:load', () => {
           particularstorestatus:false,
           particularitemstatus:false,
           active_content:[],
+          active_condition_content:[],
           checked_single:false,
           checked_user:false,
           checked_time:false,
@@ -71,12 +72,7 @@ document.addEventListener('turbolinks:load', () => {
       methods:{
         create_active: function(){
           this.activestatus =true;
-          let active_condition = [{ name: '活動名稱',
-                                    status:true,
-                                    values:this.activename,
-                                    condtion:true,
-                                  },
-                                  { name: '活動總數量',
+          let active_condition = [{ name: '活動總數量',
                                     status: this.checked_single,
                                     condtion:this.singleactivestatus,
                                     description:'優惠上限金額',
@@ -106,17 +102,55 @@ document.addEventListener('turbolinks:load', () => {
                                     values: this.item_name,
                                     condtion:true,
                                   }]
-          this.active_content =[];
+          this.active_condition_content =[];
           let active_condition_sort = active_condition.filter( function(item, index, array){
               return item.status === true
           })
-          if (this.activename !=="" && active_condition_sort.length > 1){
-              this.active_content = active_condition_sort
-              console.log(this.active_content)
+          if (this.activename !=="" && active_condition_sort.length > 0){
+              this.active_condition_content = active_condition_sort
+              console.log(this.active_condition_content)
           }else{
             alert('至少填個名稱 或是 少填了條件喔')
           }
-        }
+        },
+        create_content: function(){
+          if(this.activestatus === true){
+          let active_content_select = [{ name: '活動A:滿額折現',
+                                        status: this.checked_a,
+                                        content: this.money_discount,
+                                        value:[this.money_discount_target,this.money_discount_cash,this.money_discount_percent]
+                                      },
+                                      { name: '活動B:滿額免運',
+                                        status: this.checked_b,
+                                        value:this.free_delivery_target
+                                      },
+                                      { name: '活動C:滿額送禮',
+                                        status: this.checked_c,
+                                        value: this.extra_bonus_target
+                                      },
+                                      { name: '活動D:特定店優惠',
+                                        status: this.checked_d,
+                                        content: this.ps,
+                                        value:[this.ps_target, this.ps_cash, this.ps_percent]
+                                      },
+                                      { name: '活動E:特定商品優惠',
+                                        status: this.checked_e,
+                                        content: this.pi,
+                                        value:[this.pi_target, this.pi_cash, this.pi_percent]
+                                      }]     
+          this.active_content= active_content_select.filter( function(item, index, array){
+              return item.status === true
+          })
+          let active_hash = {
+              name: this.activename,
+              condition: this.active_condition_content,
+              content: this.active_content
+          }
+          console.log(active_hash)
+          }else{
+            alert('請先建立活動條件')
+          }
+        },
       },
       computed:{
           single_choice(){

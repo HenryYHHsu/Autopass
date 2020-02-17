@@ -17,11 +17,17 @@
          .row{
            padding: 10px 0;
          }
-         .active_information{
+         .condition_information{
            width:400;
            border-radius: 5px;
            padding: 10px;
            background-color: bisque;
+         }
+         .content_information{
+           width:400;
+           border-radius: 5px;
+           padding: 10px;
+           background-color:lightskyblue;
          }
      </style>
 </head>
@@ -156,7 +162,6 @@
                 <label>請輸入滿額免運金額: {{free_delivery_target}} </label>
                 <input class="input" type="number" placeholder="請輸入滿額免運條件金額" v-model="free_delivery_target">
               </div>
-              <br>
             </div>
             <div class="row">
               <input type="checkbox" id="checkbox" v-model="checked_c">
@@ -199,22 +204,51 @@
                 <label for="">請選擇折扣方式</label>
                 <br>
                 <input type="radio" id="s-y" value="Yes" v-model="pi">
-                <label for="s-y">滿 X 件 折 Y 元</label>
+                <label for="s-y">滿 {{pi_target}} 件 折 Y 元</label>
                 <br>
                 <input type="radio" id="s-n" value="No" v-model="pi">
-                <label for="s-n">滿 X 件 折扣 Z % </label>
+                <label for="s-n">滿 {{pi_target}} 件 折扣 Z % </label>
                 <br>
+                <div v-show ="pi === 'Yes' && checked_pi === true">
+                  <label for="">請輸入減免金額: {{pi_cash}}</label>
+                  <input class="input" type="number" placeholder="請輸入減免金額" v-model="pi_cash">
+                </div>
+                <div v-show ="pi === 'No' && checked_pi === true">
+                  <label for="">請輸入減免折數: {{pi_percent}} %</label>
+                  <input class="input" type="number" placeholder="請輸入減免折數" v-model="pi_percent">
+                </div>
               </div>
             </div>
             <div class="row" v-else></div>
+            <div class="row">
+              <button  class="button is-success is-small is-rounded is-light" @click="create_content">建立活動內容</button>
+            </div>
         </div>
         <div class="column">
           <div class="row">
-            <div class="active_information">
+            <div v-show="activestatus === true" class="condition_information">
              <h1>活動設定條件如下:</h1>
-             <ul v-for="(record, index) in active_content">               
+             <h2>活動名稱: {{activename}}</h2>
+             <ul v-for="(record, index) in active_condition_content">               
               <li> 條件 {{index+1}} :  {{record.name}} => {{record.values}} </li>
              </ul>
+            </div>
+            <div class="content_information">
+              <h1>活動選擇如下:</h1>
+                <ul v-if="checked_a===true">活動A:滿額折現
+                  <li v-if="money_discount==='Yes'"> 滿 {{money_discount_target}} 折 {{money_discount_cash}} 元</li>
+                  <li v-else> 滿 {{money_discount_target}} 折扣 {{money_discount_percent}} %</li>
+                </ul>
+                <ul v-if="checked_b===true">活動B:滿額免運 => 滿{{free_delivery_target}}免運</ul>                   
+                <ul v-if="checked_c===true">活動C:滿額送禮 => 滿{{extra_bonus_target}}送禮</ul>
+                <ul v-if="checked_d===true">活動D:特定店優惠(同商品優惠) => 滿 {{ps_target}} 件含以上
+                  <li v-if="ps==='Yes'"> 滿 {{ps_target}} 件含以上 折 {{ps_cash}} 元</li>
+                  <li v-else> 滿 {{ps_target}} 件含以上 折扣 {{ps_percent}} %</li>
+                </ul>
+                <ul v-if="checked_e===true">活動E:特定商品優惠 => 滿 {{pi_target}} 件含以上 
+                  <li v-if="pi==='Yes'"> 滿 {{pi_target}} 件含以上 折 {{pi_cash}} 元</li>
+                  <li v-else> 滿 {{pi_target}} 件含以上 折扣 {{pi_percent}} %</li>
+                </ul>
             </div>
          </div>
         </div>
