@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  a_status: false
+  a_type: false
+  a_target: 1
+  a_limit: 1
+  b_status: false
+  b_type: false
+  b_target: 1
+  b_limit: 1
+  c_status: false
+  c_start: 2020-02-19 15:50:29
+  c_end: 2020-02-19 15:50:29
+  d_status: false
+  d_target: MyString
+  e_status: false
+  e_target: 1
+
+two:
+  name: MyString
+  a_status: false
+  a_type: false
+  a_target: 1
+  a_limit: 1
+  b_status: false
+  b_type: false
+  b_target: 1
+  b_limit: 1
+  c_status: false
+  c_start: 2020-02-19 15:50:29
+  c_end: 2020-02-19 15:50:29
+  d_status: false
+  d_target: MyString
+  e_status: false
+  e_target: 1
