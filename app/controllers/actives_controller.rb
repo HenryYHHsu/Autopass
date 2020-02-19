@@ -5,7 +5,15 @@ class ActivesController < ApplicationController
     def create
         active_name = params.require(:name)
         condition = params.require(:condition) #  active_condition
-        content = params.require(:content)     #  active_content 
+        content = params.require(:content) #  active_content
+        active_key = SecureRandom.hex(5).upcase
+        puts active_key.class
+        Active.create(:name => active_name,
+                      :d_target => active_key)
+        puts "--------Create-----------"
+        a = Active.where(d_target: active_key).where(name: 'llllll' )
+        puts a
+        puts "--------Find-----------"
         for i in 0..(condition.length-1)                  
             case  condition[i][:symbol]
             when 0
@@ -17,6 +25,8 @@ class ActivesController < ApplicationController
                     condition_a_type = condition[i][:condition]
                     condition_a_limit = condition[i][:values][1]
                 end
+
+
             when 1
                 condition_b_status = condition[i][:status]
                 condition_b_target = condition[i][:values][0]
@@ -39,6 +49,9 @@ class ActivesController < ApplicationController
             else
             end
         end
+        
+        # Active.create(:name => active_name)
+
         for i in 0..(content.length-1)
             case  content[i][:symbol]
             when 0

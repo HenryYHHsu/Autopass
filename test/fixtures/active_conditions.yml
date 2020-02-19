@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 1
+  limit: false
+  limitcash: 1
+  start: 2020-02-19 23:03:13
+  end: 2020-02-19 23:03:13
+  active: one
+
+two:
+  type: 1
+  limit: false
+  limitcash: 1
+  start: 2020-02-19 23:03:13
+  end: 2020-02-19 23:03:13
+  active: two
