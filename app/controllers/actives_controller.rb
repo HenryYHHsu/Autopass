@@ -23,38 +23,58 @@ class ActivesController < ApplicationController
         for i in 0..(condition.length-1)                  
             case  condition[i][:symbol]
             when 0
-                condition_a_status = condition[i][:status]
                 condition_a_target = condition[i][:values][0]
                 if (condition[i][:condition] == true)
                     condition_a_type = condition[i][:condition]
+                    ActiveCondition.create(:condition_type => 0,
+                                           :limit => true,
+                                           :target => condition_a_target,
+                                           :active_id => current_active_id)
                 else
                     condition_a_type = condition[i][:condition]
                     condition_a_limit = condition[i][:values][1]
+                    ActiveCondition.create(:condition_type => 0,
+                                           :target => condition_a_target,
+                                           :limitcash  => condition_a_limit,
+                                           :active_id => current_active_id)
                 end
             when 1
-                condition_b_status = condition[i][:status]
                 condition_b_target = condition[i][:values][0]
                 if (condition[i][:condition] == true)
                     condition_b_type = condition[i][:condition]
+                    ActiveCondition.create(:condition_type => 1,
+                                           :limit => true,
+                                           :target => condition_b_target,
+                                           :active_id => current_active_id)
                 else
                     condition_b_type = condition[i][:condition]
                     condition_b_limit = condition[i][:values][1]
+                    ActiveCondition.create(:condition_type => 1,
+                                           :target => condition_b_target,
+                                           :limitcash  => condition_b_limit,
+                                           :active_id => current_active_id)
                 end
             when 2
-                condition_c_status = condition[i][:status]
                 condition_c_start  = condition[i][:values][0].to_time
                 condition_c_end  = condition[i][:values][1].to_time
+                    ActiveCondition.create(:condition_type => 2,
+                                           :start_datetime => condition_c_start,
+                                           :end_datetime => condition_c_end,
+                                           :active_id => current_active_id)
             when 3
-                condition_d_status = condition[i][:status]
-                condition_d_target  = condition[i][:values]
+                condition_d_target  = condition[i][:values][0].to_i
+                    ActiveCondition.create(:condition_type => 3,
+                                           :target => condition_d_target,
+                                           :active_id => current_active_id)     
             when 4
-                condition_e_status = condition[i][:status]
-                condition_e_target  = condition[i][:values]
+                condition_e_target  = condition[i][:values][0].to_i
+                    ActiveCondition.create(:condition_type => 4,
+                                           :target => condition_e_target,
+                                           :active_id => current_active_id)    
             else
             end
         end
         
-        # Active.create(:name => active_name)
 
         for i in 0..(content.length-1)
             case  content[i][:symbol]

@@ -10,20 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_19_150313) do
+ActiveRecord::Schema.define(version: 2020_02_20_041806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "active_conditions", force: :cascade do |t|
-    t.integer "type"
     t.boolean "limit", default: false
     t.integer "limitcash", default: 0
-    t.time "start"
-    t.time "end"
     t.bigint "active_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "target", default: 0
+    t.integer "condition_type", default: 0
+    t.datetime "start_datetime"
+    t.datetime "end_datetime"
     t.index ["active_id"], name: "index_active_conditions_on_active_id"
   end
 
