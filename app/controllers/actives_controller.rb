@@ -138,17 +138,13 @@ class ActivesController < ApplicationController
                                         :discountvalue => content_e_discount_value,
                                         :product_id => condition_e_product_id,
                                         :active_id => current_active_id)
+                else
+                  # need to consider data verify 
                 end
             else
             end
         end
-        puts "-----------------------------"
-        puts active_name
-        puts "-----------------------------"
-        puts condition
-        puts "-------------------------------"
-        puts content
-        puts "-------------------------------"
+
         render json: {foodlike: false}
     end
 end

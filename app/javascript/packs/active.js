@@ -59,6 +59,12 @@ document.addEventListener('turbolinks:load', () => {
           checked_d:false,
           checked_e:false,
           activestatus:false,
+          conditionstatus:false,
+          contentstatus:false,
+          create_name_status:false,
+          modify_active_name:false,
+          select_condition_status:false,
+          select_content_status:false,
           extra_bonus_target:0,
           ps:"",
           ps_target:0,
@@ -71,7 +77,7 @@ document.addEventListener('turbolinks:load', () => {
       },
       methods:{
         create_active: function(){
-          this.activestatus =true;
+          this.conditionstatus =true;
           let active_condition = [{ name: '活動總數量',
                                     symbol:0,
                                     status: this.checked_single,
@@ -104,11 +110,10 @@ document.addEventListener('turbolinks:load', () => {
           let active_condition_sort = active_condition.filter( function(item, index, array){
               return item.status === true
           })
-          if (this.activename !=="" && active_condition_sort.length > 0){
+          if (active_condition_sort.length > 0){
               this.active_condition_content = active_condition_sort
-              console.log(this.active_condition_content)
           }else{
-            alert('至少填個名稱 或是 少填了條件喔')
+            alert('至少選一個條件')
           }
         },
         create_content: function(){
@@ -139,28 +144,53 @@ document.addEventListener('turbolinks:load', () => {
                                         symbol:4,
                                         content: this.pi,
                                         values:[this.item_name,this.pi_target, this.pi_cash, this.pi_percent]
-                                      }]     
-          this.active_content= active_content_select.filter( function(item, index, array){
+                                      }]
+          this.active_content =[]  
+          let active_content_sort= active_content_select.filter( function(item, index, array){
           return item.status === true
           })
-          if(this.activestatus === true && this.active_content.length > 0 ){
-          let active_hash = {
-              name: this.activename,
-              condition: this.active_condition_content,
-              content: this.active_content
-          }
-          var self = this ;
-             axios.post("http://localhost:3000/actives",active_hash)
-                  .then(function(response){
-                    console.log(response)
-                  } )  
-
-
-
+          if (active_content_sort.length > 0){
+            this.active_content = active_content_sort
+            this.contentstatus = true
           }else{
-            alert('請建立活動條件或是勾選活動內容')
+            alert('至少選一個條件')
           }
+          console.log( this.contentstatus)
+          // if(this.activestatus === true && this.active_content.length > 0 ){
+          // let active_hash = {
+          //     name: this.activename,
+          //     condition: this.active_condition_content,
+          //     content: this.active_content
+          // }
+          // var self = this ;
+          //    axios.post("http://localhost:3000/actives",active_hash)
+          //         .then(function(response){
+          //           console.log(response)
+          //         } )  
+
+
+
+          // }else{
+          //   alert('請建立活動條件或是勾選活動內容')
+          // }
         },
+        create_name: function(){
+          if (this.activename !==""){
+             this.create_name_status = true
+             this.modify_name =true            
+          }else{
+             alert('輸入不要空白')
+          }          
+        },
+        modifyname: function(){
+            this.modify_active_name = !this.modify_active_name
+        },
+        select_condition: function(){
+            this.select_condition_status = !this.select_condition_status
+        },
+        select_content: function(){
+            this.select_content_status  = !this.select_content_status
+        }
       },
       computed:{
           single_choice(){
@@ -185,6 +215,7 @@ document.addEventListener('turbolinks:load', () => {
                 console.log(this.range)
           },
           store_choice(){
+
           },
           item_choice(){
             if (this.particularitem === 'Yes'){
