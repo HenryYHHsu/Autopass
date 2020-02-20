@@ -34,7 +34,7 @@
            width:400;
            border-radius: 5px;
            padding: 10px;
-           background-color:lightskyblue;
+           background-color:lightgreen;
          }
          .condition{
            margin-top: 20px;
@@ -263,7 +263,7 @@
               <li> 條件 {{index+1}} :  {{record.name}} => {{record.values}} </li>
              </ul>
             </div>
-            <div v-show="activestatus === true" class="content_information">
+            <div v-show="contentstatus === true" class="content_information">
               <h3>活動內容選擇如下:</h3>
                 <ul v-if="checked_a===true">活動A:滿額折現
                   <li v-if="money_discount==='Yes'"> 滿 {{money_discount_target}} 折 {{money_discount_cash}} 元</li>
@@ -280,6 +280,9 @@
                   <li v-else> 滿 {{pi_target}} 件含以上 折扣 {{pi_percent}} %</li>
                 </ul>
             </div>
+         </div>
+         <div v-if="conditionstatus === true && contentstatus === true "  class="row">
+           <button  class="button is-success  is-rounded is-light" @click="sendtobackend">建立活動</button>
          </div>
         </div>
     </div>

@@ -151,11 +151,10 @@ document.addEventListener('turbolinks:load', () => {
           })
           if (active_content_sort.length > 0){
             this.active_content = active_content_sort
-            this.contentstatus = true
+            this.contentstatus = true;
           }else{
             alert('至少選一個條件')
           }
-          console.log( this.contentstatus)
           // if(this.activestatus === true && this.active_content.length > 0 ){
           // let active_hash = {
           //     name: this.activename,
@@ -190,7 +189,24 @@ document.addEventListener('turbolinks:load', () => {
         },
         select_content: function(){
             this.select_content_status  = !this.select_content_status
-        }
+        },
+        sendtobackend: function(){
+          if(this.conditionstatus === true && this.contentstatus === true ){
+          let active_hash = {
+              name: this.activename,
+              condition: this.active_condition_content,
+              content: this.active_content
+          }
+          console.log(active_hash)
+          var self = this ;
+             axios.post("http://localhost:3000/actives",active_hash)
+                  .then(function(response){
+                    console.log(response)
+                  } )
+          }else{
+            alert('請建立活動條件或是勾選活動內容')
+          }
+        },
       },
       computed:{
           single_choice(){
