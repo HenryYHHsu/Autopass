@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_20_041806) do
+ActiveRecord::Schema.define(version: 2020_02_20_071553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,7 @@ ActiveRecord::Schema.define(version: 2020_02_20_041806) do
   end
 
   create_table "active_contents", force: :cascade do |t|
-    t.integer "type"
-    t.integer "discount_way"
+    t.integer "discount_way", default: 0
     t.integer "target"
     t.integer "store_id"
     t.integer "product_id"
@@ -38,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_02_20_041806) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "discountvalue"
+    t.integer "content_type", default: 0
     t.index ["active_id"], name: "index_active_contents_on_active_id"
   end
 

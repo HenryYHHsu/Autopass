@@ -116,29 +116,29 @@ document.addEventListener('turbolinks:load', () => {
                                         status: this.checked_a,
                                         symbol: 0,
                                         content: this.money_discount,
-                                        value:[this.money_discount_target,this.money_discount_cash,this.money_discount_percent]
+                                        values:[this.money_discount_target,this.money_discount_cash,this.money_discount_percent]
                                       },
                                       { name: '活動B:滿額免運',
                                         status: this.checked_b,
                                         symbol: 1,
-                                        value:[this.free_delivery_target]
+                                        values:[this.free_delivery_target]
                                       },
                                       { name: '活動C:滿額送禮',
                                         status: this.checked_c,
                                         symbol: 2,
-                                        value: [this.extra_bonus_target]
+                                        values: [this.extra_bonus_target]
                                       },
                                       { name: '活動D:特定店優惠',
                                         status: this.checked_d,
                                         symbol:3,
                                         content: this.ps,
-                                        value:[this.ps_target, this.ps_cash, this.ps_percent]
+                                        values:[this.store_name,this.ps_target, this.ps_cash, this.ps_percent]
                                       },
                                       { name: '活動E:特定商品優惠',
                                         status: this.checked_e,
                                         symbol:4,
                                         content: this.pi,
-                                        value:[this.pi_target, this.pi_cash, this.pi_percent]
+                                        values:[this.item_name,this.pi_target, this.pi_cash, this.pi_percent]
                                       }]     
           this.active_content= active_content_select.filter( function(item, index, array){
           return item.status === true
