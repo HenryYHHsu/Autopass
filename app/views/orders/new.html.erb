@@ -14,12 +14,86 @@
             font-size: 28px;
             color: mediumblue;
         }
+        .row {
+            padding:10px;
+            width: 200px;
+        }
     </style>
 </head>
-<body>
-    <div id="order">
-       <h1>假資料訂單產生器</h1>
+<body> 
+       <div id="order">
+          <h1>假資料訂單產生器</h1>
+          <br>
+          <div class="columns">
+              <div class="column">
+                <div class="row">
+                    <label for="">帳單金額</label>
+                    <input class="input is-info" type="number" placeholder="輸入帳單金額" v-model="fake_bill">              
+                  </div>
+                  <div class="row">
+                    <label for="">特定產品</label>
+                    <br>
+                    <div class="select is-primary">
+                        <select v-model="fake_product">
+                            <option>1 </option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>  
+                    </div>        
+                  </div>
+                  <div class="row">
+                    <label for="">特定產品數量</label>
+                    <input class="input is-info" type="number" placeholder="輸入帳單金額" v-model="fake_product_qty">              
+                  </div>
+                  <div class="row">
+                    <label for="">特定店家</label>
+                    <br>
+                    <div class="select is-primary">
+                        <select v-model="fake_store">
+                            <option>1 </option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>  
+                    </div>          
+                  </div>
+                  <div class="row">
+                    <label for="">特定使用者</label>
+                    <br>
+                    <div class="select is-primary">
+                        <select v-model="fake_user">
+                            <option>1 </option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>  
+                    </div>       
+                  </div>
+                  <div class="row">
+                    <button  class="button is-danger is-rounded is-light" @click="create_fake">產生假資料</button>
+                  </div>
+              </div>
+              <div class="column">
+
+              </div>
+          </div>
+
+       </div>
+
+       <!-- <%= form_for(@order) do |form| %>
+       <%= form.label :bill, '帳單' %>
+       <%= form.number_field :bill %>
+       <br>
        
+       <%= form.label :item, '產品' %>
+       <%= form.number_field :item %>
+       <br>
+       <%= form.label :qty, '數量' %>
+       <%= form.number_field :qty %>
+       <br>
+       <%= form.label :storename, '店家' %>
+       <%= form.number_field :storename %>
+       <br>
+       <%= form.submit %>
+       <% end %> -->
     </div>
      
 </body>

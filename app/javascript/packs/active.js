@@ -225,9 +225,6 @@ document.addEventListener('turbolinks:load', () => {
           },
           time_choice(){
                 let oneDay = 24 * 60 * 60 * 1000 
-                // this.time_delta =Math.round(Math.abs(this.range[1] - this.range[0])/oneDay)
-                
-                // console.log(this.time_delta)
                 console.log(this.range)
           },
           store_choice(){
@@ -240,6 +237,35 @@ document.addEventListener('turbolinks:load', () => {
                 this.particularitemstatus = false;
             } 
           }
+      }
+    })
+    const order = new Vue({
+      el: '#order',
+      data : {
+        fake_bill:0,
+        fake_product:"",
+        fake_product_qty:0,
+        fake_store:"",
+        fake_user:""
+      },
+      methods:{
+        create_fake: function(){
+          let fake_hash = { bill: this.fake_bill,
+                            item: this.fake_product,
+                            qty: this.fake_product_qty,
+                            storename: this.fake_store,
+                            user_id: this.fake_user}
+
+          if (this.fake_bill > 0){
+            var self = this ;
+             axios.post("http://localhost:3000/orders",fake_hash)
+                  .then(function(response){
+                    console.log(response)
+                  } )  
+          }else{
+            alert('至少輸入帳單資料')
+          }
+        },
       }
     })
 })
