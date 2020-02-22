@@ -6,15 +6,9 @@ class OrdersController < ApplicationController
     end
 
     def create
-        # @order = Order.new(order_params)
-        # redirect_to new_order_path(@order), notice:'Create successful'
-        # if @order.save
-        #     flash[:notice]="新增假資料成功"
-        #     redirect_to new_order_path(@order), notice:'Create successful'
-        # else
-        #     redirect_to new_order_path, notice:'Create fail'
-        # end 
-        puts "---------------------------------------"
+       
+        
+
     end
 
     private
